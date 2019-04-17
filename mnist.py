@@ -4,6 +4,7 @@ import numpy as np
 from urllib import request
 import gzip
 import pickle
+import os
 
 filename = [
 ["training_images","train-images-idx3-ubyte.gz"],
@@ -36,9 +37,10 @@ def init():
     save_mnist()
 
 def load():
+    if not os.path.exists('mnist.pkl'):
+        init()
     with open("mnist.pkl",'rb') as f:
         mnist = pickle.load(f)
     return mnist["training_images"], mnist["training_labels"], mnist["test_images"], mnist["test_labels"]
 
-if __name__ == '__main__':
-    init()
+
