@@ -40,6 +40,8 @@ def init():
     save_mnist()
 
 def get_test_set():
+    
+    # Create the holder lists
     one = []
     two = []
     three = []
@@ -51,6 +53,7 @@ def get_test_set():
     nine = []
     ten = []
 
+    # Append the data set to the proper list and normalize
     for i in range(0, len(mnist["test_labels"])):
         if mnist["test_labels"][i] == 0:
             one.append(mnist["test_images"][i]/255)
@@ -72,10 +75,24 @@ def get_test_set():
             nine.append(mnist["test_images"][i]/255)
         elif mnist["test_labels"][i] == 9:
             ten.append(mnist["test_images"][i]/255)
+
+    # Convert to np arrays
+    one = np.array(one)
+    two = np.array(two)
+    three = np.array(three)
+    four = np.array(four)
+    five = np.array(five)
+    six = np.array(six)
+    seven = np.array(seven)
+    eight = np.array(eight)
+    nine = np.array(nine)
+    ten = np.array(ten)
     
     return one,two,three,four,five,six,seven,eight,nine,ten
 
 def get_training_set():
+
+    # Create the holder lists
     one = []
     two = []
     three = []
@@ -87,6 +104,7 @@ def get_training_set():
     nine = []
     ten = []
 
+    # Append the data set to the proper list and normalize
     for i in range(0, len(mnist["training_labels"])):
         if mnist["training_labels"][i] == 0:
             one.append(mnist["training_images"][i]/255)
@@ -108,6 +126,18 @@ def get_training_set():
             nine.append(mnist["training_images"][i]/255)
         elif mnist["training_labels"][i] == 9:
             ten.append(mnist["training_images"][i]/255)
+
+    # Convert to np arrays
+    one = np.array(one)
+    two = np.array(two)
+    three = np.array(three)
+    four = np.array(four)
+    five = np.array(five)
+    six = np.array(six)
+    seven = np.array(seven)
+    eight = np.array(eight)
+    nine = np.array(nine)
+    ten = np.array(ten)
     
     return one,two,three,four,five,six,seven,eight,nine,ten
 
