@@ -149,16 +149,16 @@ def load():
     return mnist["training_images"], mnist["training_labels"], mnist["test_images"], mnist["test_labels"]
 
 
-init()
+# init()
 
-one,two,three,four,five,six,seven,eight,nine,ten = get_training_set()
+# one,two,three,four,five,six,seven,eight,nine,ten = get_training_set()
 
-print (len(one),len(two),len(three),len(four),len(five),len(six),len(seven),len(eight),len(nine),len(ten))
-print (len(one)+len(two)+len(three)+len(four)+len(five)+len(six)+len(seven)+len(eight)+len(nine)+len(ten))
+# print (len(one),len(two),len(three),len(four),len(five),len(six),len(seven),len(eight),len(nine),len(ten))
+# print (len(one)+len(two)+len(three)+len(four)+len(five)+len(six)+len(seven)+len(eight)+len(nine)+len(ten))
 
-one,two,three,four,five,six,seven,eight,nine,ten = get_test_set()
+# one,two,three,four,five,six,seven,eight,nine,ten = get_test_set()
 
-print (len(one),len(two),len(three),len(four),len(five),len(six),len(seven),len(eight),len(nine),len(ten))
-print (len(one)+len(two)+len(three)+len(four)+len(five)+len(six)+len(seven)+len(eight)+len(nine)+len(ten))
+# print (len(one),len(two),len(three),len(four),len(five),len(six),len(seven),len(eight),len(nine),len(ten))
+# print (len(one)+len(two)+len(three)+len(four)+len(five)+len(six)+len(seven)+len(eight)+len(nine)+len(ten))
 
 
