@@ -1,5 +1,5 @@
 ''' Driver code for MNIST classification'''
-import numpy
+import numpy as np
 import os
 import matplotlib
 import cv2
@@ -28,6 +28,7 @@ def main():
     weightmatrix = gen_weights.gen_weights(meanmedianvar)
     
     #get the bias
+    outputs = [applyWeights.applyWeights(weightmatrix,np.array(train[i]).T) for i in range(10) ]
     b = bias.gen_bias(weightmatrix)
     
     #initialize variables
