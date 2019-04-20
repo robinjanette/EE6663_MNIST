@@ -2,17 +2,25 @@ import mnist
 import numpy as np
 
 def format():
-    data, labels, _, _ = mnist.load()
+    traindata, trainlabels, testdata, testlabels = mnist.load()
 
-    labels = list(labels)
+    trainlabels = list(trainlabels)
 
     # label data and scale from (0,255) to (0,1)
-    labeled = [[], [], [], [], [],
+    trainlabeled = [[], [], [], [], [],
                [], [], [], [], []]
-    for i in range(len(data)):
-        labeled[labels[i]].append(data[i] / 255)
+    for i in range(len(traindata)):
+        trainlabeled[trainlabels[i]].append(traindata[i] / 255)
+
+    testlabels = list(testlabels)
+
+    # label data and scale from (0,255) to (0,1)
+    testlabeled = [[], [], [], [], [],
+               [], [], [], [], []]
+    for i in range(len(testdata)):
+        testlabeled[testlabels[i]].append(testdata[i] / 255)
     
-    return labeled
+    return trainlabeled, testlabeled
 
 def mmv(formatted):
     mmv_data = [{'mean': np.array([]), 'median': np.array([]), 'var': np.array([])},

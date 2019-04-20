@@ -2,7 +2,7 @@ import mmv
 import numpy as np
 import cv2
 
-f = mmv.format()
+f, _ = mmv.format()
 m = mmv.mmv(f)
 print('MNIST MMV Done.')
 
