@@ -6,4 +6,4 @@ import numpy as np
 #bias is a vector of size 10 from gen_bias
 #returns a size N array representing which digit each element is
 def classify(outputs,bias):
-    return np.argmax(outputs+bias,axis=1)
+    return np.argmax(outputs+bias)
