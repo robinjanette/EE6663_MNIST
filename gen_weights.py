@@ -7,7 +7,7 @@ import numpy as np
 def gen_weights(mmv):
     ar = np.zeros((10,784))
     for i in range(10):
-        ar[i] = mmv[i]["median"]
+        ar[i] = mmv[i]["mean"]
         ar[i] /= np.linalg.norm(ar[i])
     return ar
 

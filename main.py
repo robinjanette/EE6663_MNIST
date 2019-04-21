@@ -8,13 +8,19 @@ import gen_weights
 import classify
 import applyWeights
 import bias
+import outputmeanmedian
     
-def output_results(weightmatrix, misclassified, test):
+def output_results(meanmedianvar, weightmatrix, misclassified, test):
     print("Numerical Results")
     
     #for now, print the number of misclassified examples for every digit
     for i in range(len(misclassified)):
         print("Digit", i, ":", len(misclassified[i]), "out of", len(test[i]))
+        
+    #outputmeanmedian.vis_task1(meanmedianvar)
+    
+    
+    
     return
 
 def main():
@@ -44,7 +50,7 @@ def main():
                 misclassified[i] += [j]
     
     #output images and the weight patterns after classification
-    output_results(weightmatrix, misclassified, test)
+    output_results(meanmedianvar, weightmatrix, misclassified, test)
 
 if __name__ == '__main__':
     main()
