@@ -23,20 +23,21 @@ def format():
     return trainlabeled, testlabeled
 
 def mmv(formatted):
-    mmv_data = [{'mean': np.array([]), 'median': np.array([]), 'var': np.array([])},
-                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([])},
-                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([])},
-                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([])},
-                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([])},
-                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([])},
-                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([])},
-                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([])},
-                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([])},
-                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([])}]
+    mmv_data = [{'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])},
+                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])},
+                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])},
+                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])},
+                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])},
+                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])},
+                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])},
+                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])},
+                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])},
+                {'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])}]
                 
     for digit in range(10):
         mmv_data[digit]['mean'] = np.mean(formatted[digit], axis=0)
         mmv_data[digit]['median'] = np.median(formatted[digit], axis=0)
         mmv_data[digit]['var'] = np.var(formatted[digit], axis=0)
+        mmv_data[digit]['std'] = np.std(formatted[digit], axis=0)
 
     return mmv_data
