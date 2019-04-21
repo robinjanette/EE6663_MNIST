@@ -4,6 +4,7 @@ import numpy as np
 import os
 import matplotlib
 import cv2
+import scipy.ndimage
 import mmv
 import gen_weights
 import classify
@@ -17,18 +18,9 @@ testX = testX.astype(float)
 trainX /= 255.0
 testX /= 255.0
 
-def sigmoid(x):
-    return 1/(1+np.exp(-x))
-
-def sigmoid_d(x):
-    return x*(1-x)
-
 def softmax(x):
     return (np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True))
 
-def softmax_deriv(softmax):
-    s = softmax.reshape(-1,1)
-    return (np.diagflat(s) - np.dot(s, s.T)).T
 
 class NNOneLayer:
     def __init__(self,**args):
@@ -49,18 +41,6 @@ class NNOneLayer:
         self.weights -= (alpha* X.T.dot(delta)).T
         self.bias -= alpha * delta.sum(axis=0)
 
-
-        """
-        e_bias = Y-outputs
-        e_weights = Y-outputs+self.bias
-        d_bias = -e_bias
-        d_weights = -e_weights
-        #d_bias = e_bias * softmax_deriv(outputs)
-        #d_weights = e_weights * softmax_deriv(outputs)
-        self.bias += speed*np.sum(d_bias,axis=0)
-        #print(np.min((speed * np.dot(X.T,d_weights)).T))
-        self.weights += speed * ( np.dot(X.T,d_weights)).T
-        """
         
 trainY2 = np.zeros((trainX.shape[0],10))
 for i in range(trainY2.shape[0]):
@@ -81,8 +61,12 @@ weightmatrix = gen_weights.gen_weights(meanmedianvar)
 outputs = [applyWeights.applyWeights(weightmatrix,np.array(train[i]).T) for i in range(10) ]
 b = bias.gen_bias(weightmatrix)
 
+
+use_model = True
+
 network = NNOneLayer(weights=weightmatrix,bias=b,shape=weightmatrix.shape)
-network = NNOneLayer(shape=weightmatrix.shape)
+if not use_model:
+    network = NNOneLayer(shape=weightmatrix.shape)
 
 for i in range(1001):
     outputs = network.outputs(trainX)
@@ -94,9 +78,21 @@ for i in range(1001):
         print(len(c[c==trainY])/len(c))
         print(np.mean(np.abs(outputs-trainY2)))
         print("")
-
+        for i in range(10):
+            img = np.array(network.weights[i])
+            img -= img.min()
+            img /= img.max()
+            img *= 255
+            img = img.reshape(28,28)
+            scale = 20
+            img_pixel = scipy.ndimage.zoom(img,[scale,scale],order=0)
+            img_blur = scipy.ndimage.zoom(img,[scale,scale])
+            s = "model_" if use_model else "rand_"
+            cv2.imwrite("images/" + s +str(i)+"_w.jpg",img_pixel.astype(int))
+            cv2.imwrite("images/" + s +str(i)+"_w_blur.jpg",img_blur.astype(int))
 outputs = network.outputs(testX)
 c = network.classify(testX)
 print(len(c[c==testY])/len(c))
 print(np.mean(np.abs(outputs-testY2)))
     
+
