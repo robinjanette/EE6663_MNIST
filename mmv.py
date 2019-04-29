@@ -41,3 +41,19 @@ def mmv(formatted):
         mmv_data[digit]['std'] = np.std(formatted[digit], axis=0)
 
     return mmv_data
+
+def total_mmv():
+    traindata, _, _, _ = mnist.load()
+
+    scale = []
+    for t in traindata:
+        scale.append(t / 255)
+
+    mmv_total = {'mean': np.array([]), 'median': np.array([]), 'var': np.array([]), 'std':np.array([])}
+
+    mmv_total['mean'] = np.mean(scale, axis=0)
+    mmv_total['median'] = np.median(scale, axis=0)
+    mmv_total['var'] = np.var(scale, axis=0)
+    mmv_total['std'] = np.std(scale, axis=0)
+
+    return mmv_total
