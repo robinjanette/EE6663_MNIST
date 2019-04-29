@@ -143,16 +143,16 @@ ax.plot(x_points,random_train_acc,"r--",label="Random Train")
 ax.plot(x_points,random_test_acc,"r",label="Random Test")
 legend = ax.legend(loc='lower right', shadow=True, fontsize='x-large')
 ax.grid()
-plt.show()
+#plt.show()
 
-plt.clf()
-digitModelAcc = [0]*9
-digitRandAcc = [0]*9
+#plt.clf()
+digitModelAcc = [0]*10
+digitRandAcc = [0]*10
 
-digitTests = mnist.get_training_set()
+digitTests = mnist.get_test_set()
 for i in range(10):
-    digitModelAcc[i] = 100*list(model_network.classify(digitTests[i])).count(i)/len(digitTests[i])
-    digitRandAcc[i] = 100*list(random_network.classify(digitTests[i])).count(i)/len(digitTests[i])
+    digitModelAcc[i] = list(model_network.classify(digitTests[i])).count(i)/len(digitTests[i])
+    digitRandAcc[i] = list(random_network.classify(digitTests[i])).count(i)/len(digitTests[i])
 
 
 
@@ -170,13 +170,13 @@ alpha=opacity,
 color='b',
 label='Model')
 
-rects2 = plt.bar(index + bar_width, digitRandomAcc, bar_width,
+rects2 = plt.bar(index + bar_width, digitRandAcc, bar_width,
 alpha=opacity,
 color='g',
 label='Random')
 
 plt.xlabel('Digit')
-plt.ylabel('Accuracy (%)')
+plt.ylabel('Accuracy')
 plt.title('Digit accuracy')
 plt.xticks(index + bar_width, tuple(range(10)))
 plt.legend()
