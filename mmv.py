@@ -90,10 +90,10 @@ def display_total():
     resized_median = cv2.resize(median_img, dim, interpolation = cv2.INTER_AREA)
 
     # cv2.imshow('Total Mean', resized_mean)
-    cv2.imwrite('images/Total-MEAN.jpg', resized)
+    cv2.imwrite('images/Total-MEAN.jpg', resized_mean)
 
     # cv2.imshow('Total Median', resized_median)
-    cv2.imwrite('images/Total-MEDIAN.jpg', resized)
+    cv2.imwrite('images/Total-MEDIAN.jpg', resized_median)
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
